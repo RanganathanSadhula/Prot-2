@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sadhula Ranganathan — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Great+Vibes&display=swap" rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/a6d49d5e0d.js" crossorigin="anonymous"></script>
+
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'Inter',sans-serif;background:#000;color:#fff;line-height:1.6;overflow-x:hidden}
+    img{max-width:100%;display:block;border-radius:1rem;object-fit:cover}
+    a{text-decoration:none;color:inherit;cursor:pointer}
+
+    /* gold‑glitter background */
+    body::before{
+      content:"";position:fixed;inset:0;z-index:-1;
+      background:radial-gradient(circle,rgba(255,215,0,.16)1px,transparent 1px);
+      background-size:4px 4px;animation:glitter 3s linear infinite}
+    @keyframes glitter{0%{background-position:0 0}100%{background-position:100px 100px}}
+
+    /* nav */
+    nav{
+      position:fixed;top:1.3rem;left:50%;transform:translateX(-50%);
+      background:rgba(255,255,255,.08);backdrop-filter:blur(12px);
+      padding:.55rem 2rem;border-radius:2rem;display:flex;gap:2rem;
+      font-weight:600;z-index:1000}
+    nav a{transition:color .25s}
+    nav a:hover{color:#ffd700}
+
+    /* tilt helper */
+    .tilt{transform-style:preserve-3d;perspective:1000px;transition:transform .5s,box-shadow .5s}
+    .tilt:hover{transform:rotateX(10deg) rotateY(12deg) translateZ(25px);box-shadow:0 25px 45px rgba(0,0,0,.6)}
+
+    /* generic section */
+    section{padding:8rem 1.3rem}
+    .container{max-width:1200px;margin:0 auto}
+    .section-title{font-size:2.4rem;font-weight:900;text-transform:uppercase;text-align:center;margin-bottom:3rem}
+
+    /* hero */
+    #home{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center}
+    .hero-quote{font-size:clamp(1.6rem,4vw,3.6rem);font-weight:900;line-height:1.2}
+    .hero-quote strong{color:#19c37d}
+    .hero-name{font-family:'Great Vibes',cursive;font-size:3.5rem;margin-top:1.3rem;text-shadow:0 0 12px rgba(255,255,255,.7)}
+
+    /* about */
+    #about .wrapper{display:flex;flex-direction:column;gap:2.8rem}
+    @media(min-width:900px){#about .wrapper{flex-direction:row;align-items:center}}
+    .about-photo{width:290px;height:290px;overflow:hidden;border-radius:1.7rem}
+    .about-text p{opacity:.9;margin-top:1rem}
+
+    /* skills */
+    .chip-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1rem}
+    .chip{padding:.55rem 1rem;border:1px solid #fff;border-radius:.7rem;font-size:.82rem;font-weight:600;text-align:center;transition:.35s}
+    .chip:hover{background:#ffd700;color:#000;transform:translateY(-3px)}
+
+    /* projects */
+    .projects-grid{display:grid;gap:3rem}
+    @media(min-width:900px){.projects-grid{grid-template-columns:1fr 1fr}}
+    .project-card{background:rgba(255,255,255,.05);border-radius:1.4rem;padding:2rem;display:flex;flex-direction:column;gap:1rem}
+    .project-card h3{font-size:1.35rem;font-weight:700}
+    .project-card .highlight{color:#ffd700;font-weight:700;font-size:1rem;margin-top:.4rem}
+    .project-card .proj-links{margin-top:.6rem;display:flex;gap:.8rem;flex-wrap:wrap}
+    .project-card .proj-links a{font-size:.85rem;color:#19c37d;border:1px solid #19c37d;padding:.35rem .85rem;border-radius:.55rem;transition:.3s}
+    .project-card .proj-links a:hover{background:#19c37d;color:#000}
+
+    /* premium project */
+    @keyframes pulseGold{0%{box-shadow:0 0 10px rgba(255,215,0,.4)}50%{box-shadow:0 0 22px rgba(255,215,0,1)}100%{box-shadow:0 0 10px rgba(255,215,0,.4)}}
+    .project-card.premium{border:2px solid #ffd700;background:rgba(255,215,0,.12);animation:pulseGold 3s ease-in-out infinite}
+    .project-card.premium h3{color:#ffd700;text-shadow:0 0 8px rgba(255,215,0,.8),0 0 14px rgba(255,215,0,.6)}
+    .project-card.premium .proj-links a{border-color:#ffd700;color:#ffd700}
+    .project-card.premium .proj-links a:hover{background:#ffd700;color:#000}
+
+    /* certifications slider */
+    .slider-wrapper{position:relative;overflow:hidden;margin-top:2rem}
+    .cert-slider{display:flex;gap:2rem;overflow-x:auto;scroll-behavior:smooth;padding:1rem 0}
+    .cert-img{flex:0 0 auto;width:300px;height:auto;border-radius:1rem;box-shadow:0 0 12px rgba(255,255,255,.15);transition:transform .3s}
+    .slide-btn{
+      position:absolute;top:50%;transform:translateY(-50%);
+      background:rgba(255,215,0,.2);border:1px solid #ffd700;color:#ffd700;
+      font-size:2rem;padding:.3rem .8rem;cursor:pointer;border-radius:50%;z-index:10;transition:background .3s}
+    .slide-btn:hover{background:#ffd700;color:#000}
+    .slide-btn.left{left:0}
+    .slide-btn.right{right:0}
+
+    /* buttons & footer */
+    .cta{display:flex;flex-direction:column;gap:1.5rem;align-items:center;margin-top:2.5rem}
+    @media(min-width:500px){.cta{flex-direction:row}}
+    .btn{display:inline-flex;align-items:center;gap:.55rem;padding:.9rem 2rem;border:2px solid #fff;border-radius:.8rem;font-weight:600;transition:.3s}
+    .btn:hover{background:#fff;color:#000}
+    footer{padding:2.8rem 1.4rem;border-top:1px solid rgba(255,255,255,.09);text-align:center;font-size:.9rem;display:flex;flex-direction:column;align-items:center;gap:1.4rem}
+    footer .socials{display:flex;gap:1.8rem;font-size:1.4rem}
+    footer .socials a:hover{color:#ffd700}
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#certifications">Certifications</a>
+    <a href="#resume">Resume</a>
+  </nav>
+
+  <!-- Hero -->
+  <section id="home">
+    <div class="container">
+      <p class="hero-quote">
+        "I don't just solve problems — I reimagine what's <strong>possible</strong>.
+        Where others see <strong>boundaries</strong>, I see blueprints for innovation.
+        Every challenge is an <strong>invitation</strong> to create, transform,
+        and lead the future through code and <strong>intelligence</strong>."
+      </p>
+      <p class="hero-name">Sadhula Ranganathan</p>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <div class="container wrapper">
+      <div class="about-photo tilt">
+        <img src="C:/Users/gamin/Downloads/pi2.jpg" alt="Profile">
+      </div>
+      <div class="about-text">
+        <h2 class="section-title" style="text-align:left">About Me</h2>
+        <p>AI/ML engineer &amp; full‑stack developer with a passion for transforming bold visions into elegant, scalable products. My toolkit spans Python, Java, AI (Artificial Intelligence), ML (Machine Learning), DL (Deep Learning) &amp; TS (TensorFlow).</p>
+        <p>Currently <strong>Zoho‑Intern</strong> and open to impactful opportunities.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills">
+    <div class="container">
+      <h2 class="section-title">Skills</h2>
+      <h3 style="margin-bottom:1rem;font-weight:700">Programming Languages</h3>
+      <div class="chip-grid" style="margin-bottom:2rem">
+        <span class="chip tilt">Python</span>
+        <span class="chip tilt">C</span>
+        <span class="chip tilt">Java</span>
+        <span class="chip tilt">AI</span>
+        <span class="chip tilt">ML</span>
+        <span class="chip tilt">DL</span>
+      </div>
+      <h3 style="margin-bottom:1rem;font-weight:700">Frontend / UI</h3>
+      <div class="chip-grid" style="margin-bottom:2rem">
+        <span class="chip tilt">HTML5</span>
+        <span class="chip tilt">CSS3</span>
+        <span class="chip tilt">CSS5</span>
+        <span class="chip tilt">Bootstrap</span>
+      </div>
+      <h3 style="margin-bottom:1rem;font-weight:700">Backend / Database</h3>
+      <div class="chip-grid">
+        <span class="chip tilt">Node.js</span>
+        <span class="chip tilt">JDBS</span>
+        <span class="chip tilt">PHP</span>
+        <span class="chip tilt">MySQL</span>
+        <span class="chip tilt">MongoDB</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects">
+    <div class="container">
+      <h2 class="section-title">Projects</h2>
+      <div class="projects-grid">
+        <!-- PREMIUM FINAL‑YEAR PROJECT -->
+        <div class="project-card premium tilt">
+          <h3>Traffic Clearance System For Ambulance In High Density Areas</h3>
+          <p>IoT‑enhanced vision system leveraging YOLOv8 and LSTM to detect ambulances in real‑time video and automatically switch traffic signals to green, enabling rapid emergency response in congested cities.</p>
+          <p class="highlight">🏆 Best Project Award</p>
+          <p class="highlight">🥈 National Level Event Best Project Idea — 2<sup>nd</sup> Prize @ STEPCON (GMRIT)</p>
+          <div class="proj-links">
+            <a href="https://github.com/RanganathanSadhula" target="_blank">GitHub</a>
+            <a href="https://github.com/RanganathanSadhula/Traffic-Clearance-System-For-Ambulance-In-High-Density-Areas" target="_blank">Live Demo</a>
+          </div>
+        </div>
+
+        <!-- Other projects -->
+        <div class="project-card tilt">
+          <h3>AI Chat Bot</h3>
+          <p>A conversational chatbot using NLP, providing intelligent responses and task automation.</p>
+          <div class="proj-links">
+            <a href="https://github.com/RanganathanSadhula" target="_blank">GitHub</a>
+          </div>
+        </div>
+
+        <div class="project-card tilt">
+          <h3>Hand Sign Recognition</h3>
+          <p>Recognizes hand gestures using CNN &amp; OpenCV to assist non‑verbal communication.</p>
+          <div class="proj-links">
+            <a href="https://github.com/RanganathanSadhula" target="_blank">GitHub</a>
+          </div>
+        </div>
+
+        <div class="project-card tilt">
+          <h3>Dog Breed Detection</h3>
+          <p>Deep‑learning model classifying dog breeds for accurate pet identification.</p>
+          <div class="proj-links">
+            <a href="https://github.com/RanganathanSadhula" target="_blank">GitHub</a>
+          </div>
+        </div>
+
+        <div class="project-card tilt">
+          <h3>Flipkart Clone</h3>
+          <p>A full‑stack e‑commerce web app with product listings, cart, and authentication.</p>
+          <div class="proj-links">
+            <a href="https://github.com/RanganathanSadhula" target="_blank">GitHub</a>
+            <a href="#" target="_blank">Live Site</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Certifications -->
+  <section id="certifications">
+    <div class="container">
+      <h2 class="section-title">Certifications</h2>
+      <div class="slider-wrapper">
+        <button class="slide-btn left" onclick="scrollSlider(-1)">&#10094;</button>
+        <div class="cert-slider" id="certSlider">
+          <!-- Replace image sources with your certificate images -->
+          <img src="C:\Users\gamin\Downloads\pdftoimage\c1\c1-1.jpg" alt="Certification 1" class="cert-img tilt" />
+          <img src="C:\Users\gamin\Downloads\pdftoimage\c2.png" alt="Certification 2" class="cert-img tilt" />
+          <img src="C:\Users\gamin\Downloads\pdftoimage\c3\c3-1.jpg" alt="Certification 3" class="cert-img tilt" />
+          <img src="C:\Users\gamin\Downloads\pdftoimage\c4\c4-1.jpg" alt="Certification 4" class="cert-img tilt" />
+
+          <img src="C:\Users\gamin\Downloads\pdftoimage\c5\c5-1.jpg" alt="Certification 5" class="cert-img tilt" />
+          <img src="C:\Users\gamin\Downloads\pdftoimage\c6\c6-1.jpg" alt="Certification 6" class="cert-img tilt" />
+          <img src="C:\Users\gamin\Downloads\pdftoimage\c7\c7-1.jpg" alt="Certification 7" class="cert-img tilt" />
+          <img src="C:\Users\gamin\Downloads\pdftoimage\c8\c8-1.jpg" alt="Certification 8" class="cert-img tilt" />
+
+          <img src="C:\Users\gamin\Downloads\pdftoimage\c9\c9-1.jpg" alt="Certification 9" class="cert-img tilt" />
+          <img src="C:\Users\gamin\Downloads\pdftoimage\c10.png" alt="Certification 10" class="cert-img tilt" />
+          <img src="C:\Users\gamin\Downloads\pdftoimage\c11\c11-1.jpg" alt="Certification 11" class="cert-img tilt" />
+
+        </div>
+        <button class="slide-btn right" onclick="scrollSlider(1)">&#10095;</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Resume -->
+  <section id="resume">
+    <div class="container">
+      <h2 class="section-title">Resume</h2>
+      <div class="cta">
+        <a href="C:\Users\gamin\Downloads\Sadhula Ranganathan_Python Developer_AI_ML.pdf" download class="btn"><i class="fas fa-file-download"></i> Download Resume</a>
+        <a href="https://www.linkedin.com/in/raghav-s-mr97/" target="_blank" class="btn"><i class="fab fa-linkedin"></i> Visit LinkedIn</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>Designed &amp; Developed by Sadhula Ranganathan</p>
+    <div class="socials">
+      <a href="https://github.com/RanganathanSadhula" target="_blank"><i class="fab fa-github"></i></a>
+      <a href="https://www.linkedin.com/in/raghav-s-mr97/" target="_blank"><i class="fab fa-linkedin"></i></a>
+      <a href="mailto:ranganathansadhula@gmail.com"><i class="fas fa-envelope"></i></a>
+    </div>
+  </footer>
+
+  <script>
+    function scrollSlider(dir){
+      const slider=document.getElementById('certSlider');
+      const scrollAmount=320;
+      slider.scrollBy({left:dir*scrollAmount,behavior:'smooth'});
+    }
+  </script>
+</body>
+</html>
